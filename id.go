@@ -27,7 +27,7 @@ func (id *ID) WriteGolang(w io.Writer) error {
 	return nil
 }
 
-func (id *ID) WriteRuby(w io.Writer) error {
+func (id *ID) WriteRuby(w io.Writer, kase string) error {
 	for i := range id.Path {
 		if i == len(id.Path)-1 {
 			if i > 0 {
@@ -36,7 +36,7 @@ func (id *ID) WriteRuby(w io.Writer) error {
 					return err
 				}
 			}
-			_, err := fmt.Fprintf(w, "%s", id.Path[i].SnakeCase())
+			_, err := fmt.Fprintf(w, "%s", id.Path[i].Case(kase))
 			if err != nil {
 				return err
 			}
@@ -56,27 +56,30 @@ func (id *ID) WriteRuby(w io.Writer) error {
 	return nil
 }
 
-func (id *ID) WritePython(w io.Writer) error {
+func (id *ID) WritePython(w io.Writer, kase string) error {
 	l := len(id.Path)
 	if l == 0 {
 		return nil
 	} else if l == 1 {
 		if id.Path[0].String() == "string" {
 			_, err := w.Write([]byte("str"))
-			if err != nil {
-				return err
-			}
-		} else {
-			_, err := fmt.Fprintf(w, "%s", id.Path[0].PascalCase())
-			if err != nil {
-				return err
-			}
-		}
-	} else {
-		_, err := fmt.Fprintf(w, "%s", id.Path[l-1].PascalCase())
-		if err != nil {
 			return err
 		}
 	}
-	return nil
+	_, err := fmt.Fprintf(w, "%s", id.Path[l-1].Case(kase))
+	return err
+}
+
+func (id *ID) WriteTypescript(w io.Writer, kase string) error {
+	l := len(id.Path)
+	if l == 0 {
+		return nil
+	} else if l == 1 {
+		if id.Path[0].String() == "string" {
+			_, err := w.Write([]byte("str"))
+			return err
+		}
+	}
+	_, err := fmt.Fprintf(w, "%s", id.Path[l-1].Case(kase))
+	return err
 }

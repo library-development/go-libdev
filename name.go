@@ -45,3 +45,20 @@ func (n *Name) KebabCase() string {
 func (n *Name) AllLowerNoSpaces() string {
 	return strings.Join(n.Words, "")
 }
+
+func (n *Name) Case(c string) string {
+	switch c {
+	case "pascal":
+		return n.PascalCase()
+	case "camel":
+		return n.CamelCase()
+	case "snake":
+		return n.SnakeCase()
+	case "kebab":
+		return n.KebabCase()
+	case "pkg":
+		return n.AllLowerNoSpaces()
+	default:
+		return n.String()
+	}
+}
