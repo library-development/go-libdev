@@ -26,3 +26,32 @@ func (id *ID) WriteGolang(w io.Writer) error {
 	}
 	return nil
 }
+
+func (id *ID) WriteRuby(w io.Writer) error {
+	for i := range id.Path {
+		if i == len(id.Path)-1 {
+			if i > 0 {
+				_, err := w.Write([]byte("."))
+				if err != nil {
+					return err
+				}
+			}
+			_, err := fmt.Fprintf(w, "%s", id.Path[i].SnakeCase())
+			if err != nil {
+				return err
+			}
+		} else {
+			if i > 0 {
+				_, err := w.Write([]byte("::"))
+				if err != nil {
+					return err
+				}
+			}
+			_, err := fmt.Fprintf(w, "%s", id.Path[i].CamelCase())
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
