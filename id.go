@@ -55,3 +55,28 @@ func (id *ID) WriteRuby(w io.Writer) error {
 	}
 	return nil
 }
+
+func (id *ID) WritePython(w io.Writer) error {
+	l := len(id.Path)
+	if l == 0 {
+		return nil
+	} else if l == 1 {
+		if id.Path[0].String() == "string" {
+			_, err := w.Write([]byte("str"))
+			if err != nil {
+				return err
+			}
+		} else {
+			_, err := fmt.Fprintf(w, "%s", id.Path[0].PascalCase())
+			if err != nil {
+				return err
+			}
+		}
+	} else {
+		_, err := fmt.Fprintf(w, "%s", id.Path[l-1].PascalCase())
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
