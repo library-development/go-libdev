@@ -1,5 +1,10 @@
 package libdev
 
+import (
+	"fmt"
+	"io"
+)
+
 // Library is the top level unit of code distribution.
 // Libraries can be compiled into Python, Ruby, Java, C#, TypeScript, Go and Rust.
 type Library struct {
@@ -11,4 +16,36 @@ type Library struct {
 	Constants []Constant
 	Types     []Type
 	Functions []Function
+}
+
+func (l *Library) WriteHTML(w io.Writer) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WritePython(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteRuby(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteJava(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteCSharp(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteTypeScript(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteGo(dir string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (l *Library) WriteRust(dir string) error {
+	return fmt.Errorf("not implemented")
 }
