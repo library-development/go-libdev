@@ -6,7 +6,7 @@ import (
 )
 
 type ID struct {
-	Path []Name
+	Path Path
 }
 
 func (id *ID) WriteGolang(w io.Writer) error {
