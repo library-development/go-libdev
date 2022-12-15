@@ -2,6 +2,7 @@ package libdev
 
 import (
 	"fmt"
+	"html/template"
 	"io"
 )
 
@@ -18,8 +19,13 @@ type Library struct {
 	Functions []Function
 }
 
+// WriteHTML writes the library to the given writer as HTML.
 func (l *Library) WriteHTML(w io.Writer) error {
-	return fmt.Errorf("not implemented")
+	template, err := template.New("library").Parse(libraryTemplate)
+	if err != nil {
+		return err
+	}
+	return template.Execute(w, l)
 }
 
 func (l *Library) WritePython(dir string) error {
