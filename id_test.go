@@ -3,7 +3,7 @@ package libdev_test
 import (
 	"testing"
 
-	"github.com/library-development/go-libdev"
+	"lib.dev/libdev"
 )
 
 var inputs []libdev.ID = []libdev.ID{

@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/library-development/go-libdev"
+	"lib.dev/libdev"
 )
 
 var exampleLibrary = libdev.Library{

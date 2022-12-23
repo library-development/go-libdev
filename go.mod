@@ -1,3 +1,3 @@
-module github.com/library-development/go-libdev
+module lib.dev/libdev
 
 go 1.19
